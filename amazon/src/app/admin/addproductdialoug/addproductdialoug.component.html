@@ -1,0 +1,75 @@
+<h1 mat-dialog-title>Add Products</h1>
+
+
+<div mat-dialog-content>
+  <form [formGroup]="productForm">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Category</mat-label>
+      <mat-select formControlName="category" placeholder="Category">
+        <mat-option value="Fruits">Fruits</mat-option>
+        <mat-option value="Vegetables">Vegetables</mat-option>
+        <mat-option value="Electronics">Electronics</mat-option>
+        <mat-option value="Add">Addvertisement</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Name</mat-label>
+      <input formControlName="productName" matInput placeholder="Name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Brand</mat-label>
+      <input formControlName="brand" matInput placeholder="Brnad Name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Model</mat-label>
+      <input formControlName="model" matInput placeholder="Model Name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Source of image</mat-label>
+      <input formControlName="imgsrc" matInput placeholder="Source">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Quantity</mat-label>
+      <input formControlName="quantity" matInput placeholder="Product quantity">
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Choose a date</mat-label>
+      <input formControlName="addeddate" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+
+      <mat-label>Product Price</mat-label>
+      <input formControlName="productPrice" matInput placeholder="Orignal price">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Product Discount price</mat-label>
+      <input formControlName="productDiscountPrice" matInput placeholder="Discount price">
+    </mat-form-field>
+    <!-- <mat-form-field appearance="outline">
+        <mat-label>Product Varient</mat-label>
+        <input formControlName="varient" matInput placeholder="Varient">
+      </mat-form-field> -->
+    <mat-form-field appearance="outline">
+      <mat-label>Product Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="Ex. Product Description..."></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-action [align]="'end'">
+  <button mat-raised-button color="accent" mat-dialog-close>
+    close
+  </button>
+  <button mat-raised-button color="primary" style="margin-left:10px" (click)="addProduct()">
+    {{actionBtn}}
+  </button>
+</div>

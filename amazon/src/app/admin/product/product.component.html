@@ -1,0 +1,243 @@
+<div class="container">
+  <h3 style="margin-top: 2%">Product table</h3>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="accent" (click)="openDialog()">
+      Add Product & Ad
+    </button>
+  </div>
+  <div style="margin-top: 2px">
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. apple" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+
+        <ng-container matColumnDef="productId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Product Id</th>
+          <td mat-cell *matCellDef="let row"> {{row.productId}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</th>
+          <td mat-cell *matCellDef="let row"> {{row.productName}} </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+          <td mat-cell *matCellDef="let row"> {{row.category}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="brand">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Brand </th>
+          <td mat-cell *matCellDef="let row"> {{row.brand}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="model">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
+          <td mat-cell *matCellDef="let row"> {{row.model}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+          <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="productPrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Price </th>
+          <td mat-cell *matCellDef="let row"> {{row.productPrice | currency:'₹'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="productDiscountPrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount Price </th>
+          <td mat-cell *matCellDef="let row"> {{row.productDiscountPrice | currency:'₹'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="imgsrc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> imgsrc </th>
+          <td mat-cell *matCellDef="let row"> {{row.imgsrc}} </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)='editProduct(row)'>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)='deleteProduct(row.productId)'>
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" title="Add Varients" (click)='addVarient(row)'>
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="addeddate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+          <td mat-cell *matCellDef="let row"> {{row.addeddate | date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="varient">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Varient </th>
+          <td mat-cell *matCellDef="let row"> {{row.varient }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell *matCellDef="let row"> {{row.description }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[ 5,10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+
+  </div>
+
+
+
+
+  <div style="margin-top: 2px">
+    <h3 style="margin-top: 2%">Varients table</h3>
+    <mat-form-field appearance="standard">
+
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilterVarient($event)" placeholder="Ex. apple" #inputVarient>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSourceVarient" matSort>
+
+
+        <ng-container matColumnDef="productId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Product Id</th>
+          <td mat-cell *matCellDef="let row, let i = index"> {{row.productId}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="varientId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Varient Id</th>
+          <td mat-cell *matCellDef="let row, let i = index"> {{row.varientId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>value</th>
+          <td mat-cell *matCellDef="let row, let i = index"> {{row.value}} </td>
+        </ng-container>
+
+
+
+
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)='editVarient(row)'>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)='deleteVarient(row.varientId)'>
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" title="Add Varients Options" (click)='addVarientValues(row)'>
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsVarient"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsVarient;"></tr>
+
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{inputVarient.value}}"</td>
+        </tr>
+      </table>
+
+      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
+    </div>
+
+  </div>
+
+
+
+  <div style="margin-top: 2px">
+    <h3 style="margin-top: 2%">Varient values table</h3>
+    <mat-form-field appearance="standard">
+
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilterVarientValues($event)" placeholder="Ex. apple" #inputVarientValues>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSourceVarientValues" matSort>
+
+        <ng-container matColumnDef="varientValuesId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Varient Values Id</th>
+          <td mat-cell *matCellDef="let row, let i = index"> {{row.varientValuesId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="varientId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Varient Id</th>
+          <td mat-cell *matCellDef="let row, let i = index"> {{row.varientId}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Varient Name</th>
+          <td mat-cell *matCellDef="let row, let i = index"> {{row.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Varient Price</th>
+          <td mat-cell *matCellDef="let row, let i = index"> {{row.price}} </td>
+        </ng-container>
+
+
+
+
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)='editVarientValue(row)'>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)='deleteVarientValue(row.varientValuesId)'>
+              <mat-icon>delete</mat-icon>
+            </button>
+
+          </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsVarientValues"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsVarientValues;"></tr>
+
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{inputVarientValues.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+
+  </div>
+
+
+</div>

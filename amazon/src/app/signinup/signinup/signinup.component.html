@@ -1,0 +1,87 @@
+<div class="center-content">
+    <mat-card class="example-card">
+          <mat-card-header>
+                      <mat-card-title><img src="https://ik.imagekit.io/uqm33vog0ra/amazondp_jV4WWLOlSJa.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1644258630395" alt="">
+                            
+                      </mat-card-title>
+                
+          </mat-card-header>
+
+          <mat-card-content>
+                <mat-tab-group>
+                      <mat-tab label="Login">
+
+                            <mat-form-field class="example-full-width">
+                                  <mat-label>Email</mat-label>
+                                  <input matInput type="email" required placeholder="Email" value="" [(ngModel)]="log_email">
+                                  <mat-icon matSuffix>  email</mat-icon>
+                            </mat-form-field>
+
+
+
+                            <mat-form-field class="example-full-width">
+                                  <mat-label>Password</mat-label>
+                                  <input matInput type="password" placeholder="Password" value="" required [(ngModel)]="log_password" [type]="hide ? 'password' : 'text'">
+                                  <mat-icon matSuffix>vpn_key</mat-icon>
+                            </mat-form-field>
+
+                            <button mat-button color="accent" class="buttonlogin"  (click)="login()">Login</button>
+                            <br>
+                            <a routerLink="/forget">Forget Password</a>
+
+                      </mat-tab>
+                      <mat-tab label="Register">
+                            <mat-form-field class="example-full-width">
+                                  <mat-label>FirstName</mat-label>
+                                  <input matInput type="text" placeholder="FirstName" value="" required [(ngModel)]="user.firstname">
+                                  <mat-icon matSuffix>supervisor_account</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                  <mat-label>LastName</mat-label>
+                                  <input matInput type="text" placeholder="LastName" value="" required [(ngModel)]="user.lastname">
+                                  <mat-icon matSuffix>supervisor_account</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                  <mat-label>Email</mat-label>
+                                  <input matInput type="email" placeholder="Email" value="" required [(ngModel)]="user.email">
+                                  <mat-icon matSuffix> email</mat-icon>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                  <mat-label>Password</mat-label>
+                                  <input matInput type="password" placeholder="Password" value="" required #password="ngModel" [(ngModel)]="user.password">
+                                  <mat-icon matSuffix> vpn_key</mat-icon>
+                            </mat-form-field>
+                            <span *ngIf="password.invalid && password.touched" style="color:red;">Please Enter a Valid Password</span>
+
+
+                            <mat-form-field class="example-full-width">
+                                  <mat-label>Age</mat-label>
+                                  <input matInput type="number" placeholder="Age" value="" required [(ngModel)]="user.age">
+                                  <mat-icon matSuffix>date_range</mat-icon>
+                            </mat-form-field>
+
+
+                            <mat-form-field class="example-full-width">
+                                  <mat-label>Address</mat-label>
+                                  <input matInput type="text" placeholder="Address" value="" required [(ngModel)]="user.address">
+                                  <mat-icon matSuffix> my_location</mat-icon>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>User Role</mat-label>
+                                    <mat-select required [(ngModel)]="user.role" placeholder="User Role">
+                                        <mat-option value="ADMIN">Admin</mat-option>
+                                        <mat-option value="CUSTOMER">Customer</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+
+                            <button mat-button color="accent" class="buttonlogin" (click)="register()">Register</button>
+                      </mat-tab>
+
+                </mat-tab-group>
+
+          </mat-card-content>
+
+    </mat-card>
+</div>
