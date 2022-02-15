@@ -1,5 +1,5 @@
 export interface Cart {
-
+    
     bufcartId: number;
     orderId: number;
     email: string;
@@ -8,4 +8,6 @@ export interface Cart {
     price: number;
     productId: number;
     productname: string;
+    total:string,
 }
+

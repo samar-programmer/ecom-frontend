@@ -20,11 +20,10 @@ export class RecoveryPasswordComponent implements OnInit {
   {
       var result=this.service.verifyOtpFromRemote(this.user);
 
-        result.subscribe((data:any)=>{console.log(data)
+        result.subscribe((data:any)=>{
         
         if(data.toString()=="Success")
         {
-          // <a [RouterLink]="['./home']"></a>
           this.route.navigate(['']);
         }
         else

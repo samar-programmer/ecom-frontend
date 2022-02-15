@@ -1,9 +1,11 @@
+import { Product } from './../../Model/product';
+
 import { ProductService } from './../../services/product.service';
 
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { products } from 'src/app/Model/product';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -51,12 +53,10 @@ export class AddproductdialougComponent implements OnInit {
       this.productForm.controls['quantity'].setValue(this.editProduct.quantity);
       this.productId = parseInt(this.editProduct.productId);
     }
-    console.log(this.editProduct);
 
   }
 
   addProduct() {
-    console.log(this.productForm.value.productName);
     let productName = this.productForm.value.productName;
     let category = this.productForm.value.category;
     let imgsrc = this.productForm.value.imgsrc;
@@ -69,7 +69,7 @@ export class AddproductdialougComponent implements OnInit {
     let quantity = this.productForm.value.quantity;
     let product: any;
     if (this.productId > 0) {
-      product = new products(this.productId, productName, category, imgsrc, addeddate, productPrice, productDiscountPrice, description, brand, model, quantity);
+      product = new Product(this.productId, productName, category, imgsrc, addeddate, productPrice, productDiscountPrice, description, brand, model, quantity, '','','',[]);
       if (this.productForm.valid) {
         this.productService.addProduct(product, localStorage.getItem("email"))
           .subscribe({

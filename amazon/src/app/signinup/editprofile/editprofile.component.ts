@@ -21,7 +21,6 @@ export class EditprofileComponent implements OnInit {
     var email=localStorage.getItem("email")
  
     if(email==null){
-     console.log("No Email");
   
     this.route.navigate(['']);
     }
@@ -31,7 +30,6 @@ export class EditprofileComponent implements OnInit {
       result.subscribe({
         next:(response:any)=>{
           this.user = response.user;
-          console.log(response.user.email);
         },
         
       })

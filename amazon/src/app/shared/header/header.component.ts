@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
   userType:String ='';
   ngOnInit(): void {
     this.userType = this.commonService.userType;
-    console.log("header "+this.userType)
   }
   
   toggleSideBar() {

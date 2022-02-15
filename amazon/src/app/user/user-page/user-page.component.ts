@@ -1,6 +1,7 @@
+import { Product } from './../../Model/product';
 
 import { CartService } from './../../services/cart.service';
-import { products } from './../../Model/product';
+
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
   totalCartItems:any;
   constructor(private productService: ProductService, private cartservice: CartService, private route:Router) { }
 
@@ -37,10 +38,8 @@ export class UserPageComponent implements OnInit {
       next:(response:any)=>{
         if(response.successErrorType == "SUCCESS"){
           this.products= response.productList;
-          console.log("sasi"+this.products); 
-         for(let product of response.productList ){
-          console.log("sasi"+this.products); //product.varients.varientvalues = );
-         }
+        //  for(let product of response.productList ){
+        //  }
         }
        
       },

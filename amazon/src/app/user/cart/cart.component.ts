@@ -3,8 +3,7 @@ import { Cart } from './../../Model/cart';
 import { CartService } from './../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
 
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +12,7 @@ import html2canvas from 'html2canvas';
 })
 export class CartComponent implements OnInit {
 
-  cartlist: any;
+  cartlist:any;
   totalSum: number = 0;
   constructor(private cartService: CartService, private route: Router) {
 
@@ -26,8 +25,6 @@ export class CartComponent implements OnInit {
     var email = localStorage.getItem("email")
 
     if (email == null) {
-      console.log("No Email");
-
       this.route.navigate(['']);
     }
 
@@ -35,6 +32,7 @@ export class CartComponent implements OnInit {
 
     this.cartService.getCartItems(localStorage.getItem("email")).subscribe((response: any) => {
       this.cartlist = response.oblist;
+      
       this.cartlist.forEach((value: any) => {
         this.totalSum = this.totalSum + (value.quantity * value.total);
       });
@@ -68,33 +66,13 @@ export class CartComponent implements OnInit {
 
 
   public convetToPDF() {
-    debugger;
-    // var data: any = document.getElementById('contentToConvert');
-    // html2canvas(data).then(canvas => {
-    //   var imgWidth = 208;
-    //   var pageHeight = 295;
-    //   var imgHeight = canvas.height * imgWidth / canvas.width;
-    //   var heightLeft = imgHeight;
-
-    //   const contentDataURL = canvas.toDataURL('image/png')
-    //   let pdf: any = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
-    //   var position = 0;
-    //   pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-    //   pdf.save('new-file.pdf'); // Generated PDF
-    // });
-
    let result = this.cartService.downloadPdf(localStorage.getItem("email"));
 
    result.subscribe({
     
     next:(response:any)=>{
       const blob =new Blob([response], {type:'application/pdf'});
-      // if(window.navigator && window.navigator.msSaveOrOpenBlob){
-      //   window.navigator.msSaveOrOpenBlob(blob);
-      //   return;
-      // }
-     
-        
+      
        const data = window.URL.createObjectURL(blob);
        const link =document.createElement('a');
        link.href = data;
@@ -108,9 +86,6 @@ export class CartComponent implements OnInit {
        },100
        )
 
-       
-      // window.navigator.msSaveOrOpenBlob(blob);
-      
    
   }
   });

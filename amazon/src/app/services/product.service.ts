@@ -1,9 +1,11 @@
-import { productvarient } from './../Model/productvarient';
-import { products } from './../Model/product';
+import { VarientValues } from './../Model/varient-value';
+import { ProductVarient } from './../Model/product-varient';
+import { Product } from './../Model/product';
+
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { varientvalues } from '../Model/varientvalues';
+import { HttpClient,  HttpParams } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +14,16 @@ export class ProductService {
   baseUrl : string = 'http://localhost:10002/amazon/api/admin/';
   constructor(private httpClient:HttpClient) { }
 
-  //  httpOptions = {
-  //   headers: new HttpHeaders({
-  //     'Access-Control-Allow-Origin': ' http://localhost:10002',
-  //     'Access-Control-Allow-Headers': 'Content-Type Authorization' ,
-  //     'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
-  //   })
-  // };
 
-   
-
-  addProduct (product:products, email:any){
+  addProduct (product:Product, email:any){
     product.email = email;
-    let result:any = this.httpClient.post<any>( this.baseUrl+'addProduct',product, );
+    let result:any = this.httpClient.post<any>( this.baseUrl+'product',product, );
     return result;
     
   }
 
   getAllProducts(){
-    let result:any =this.httpClient.get( this.baseUrl+"getProducts");
+    let result:any =this.httpClient.get( this.baseUrl+"products");
     return result;
   }
 
@@ -40,30 +33,29 @@ export class ProductService {
   }
 
   deleteProduct(id:number){
-    let result:any = this.httpClient.delete( this.baseUrl+"deleteProduct/"+id);
+    let result:any = this.httpClient.delete( this.baseUrl+"product/"+id);
     return result;
   }
 
   deleteVarient(id:any){
-    let result:any = this.httpClient.delete( this.baseUrl+"deleteVarient/"+id);
+    let result:any = this.httpClient.delete( this.baseUrl+"varient/"+id);
     return result;
   }
   
   deleteVarientValue(id:any){
-    let result:any = this.httpClient.delete( this.baseUrl+"deleteVarientValue/"+id);
+    let result:any = this.httpClient.delete( this.baseUrl+"varientvalue/"+id);
     return result;
   }
   
 
 
   addVarient(productId:any, value:any, email:any){
-    console.log("add");
     
     let params = new HttpParams()
     .set('productId', productId)
     .set('value', value)
     .set('email',email);
-    let result:any = this.httpClient.post( this.baseUrl+'addVarient',params);
+    let result:any = this.httpClient.post( this.baseUrl+'varient',params);
     return result;
   }
 
@@ -74,24 +66,21 @@ export class ProductService {
     .set('name', name)
     .set('price', price)
     .set('email', email);
-    let result:any = this.httpClient.post( this.baseUrl+'addVarientValues',params);
+    let result:any = this.httpClient.post( this.baseUrl+'varientvalue',params);
     return result;
   }
   
 
 
-  editVarient(variant:productvarient, email:any){
-    console.log("edit");
+  editVarient(variant:ProductVarient, email:any){
     variant.email = email;
-    let result:any = this.httpClient.post( this.baseUrl+'editVarient',variant);
+    let result:any = this.httpClient.put( this.baseUrl+'varient',variant);
     return result;
   }
 
-  editVarientValues(variantvalues:varientvalues, email:any){
+  editVarientValues(variantvalues:VarientValues, email:any){
     variantvalues.email = email;
-    console.log("edit");
-    debugger
-    let result:any = this.httpClient.post( this.baseUrl+'editVarientValues',variantvalues);
+    let result:any = this.httpClient.put( this.baseUrl+'varientvalue',variantvalues);
     return result;
   }
   

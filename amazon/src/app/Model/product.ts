@@ -1,6 +1,8 @@
+import { ProductVarient } from './product-varient';
 import { NumberValueAccessor } from '@angular/forms';
 
-export class products{
+
+export class Product{
     constructor(
         public productId?:number,
         public productName?: string,
@@ -16,5 +18,7 @@ export class products{
         public totalPrice?:string,
         public radiocheck?:string,
         public email?:String,
+        public varients?:ProductVarient[],
         ) {}
+
 }

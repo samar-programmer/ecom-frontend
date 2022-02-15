@@ -6,9 +6,8 @@ import { ProductService } from './../../services/product.service';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { products } from 'src/app/Model/product';
-import { productvarient } from 'src/app/Model/productvarient';
-import { varientvalues } from 'src/app/Model/varientvalues';
+import { VarientValues } from 'src/app/Model/varient-value';
+
 
 @Component({
   selector: 'app-varient-values',
@@ -39,11 +38,9 @@ export class VarientValuesComponent implements OnInit {
     });
 
     if (this.editProduct) {
-      console.log(this.editProduct);
       this.productForm.controls['varientId'].setValue(this.editProduct.varientId);
       this.productForm.controls['name'].setValue(this.editProduct.name);
       this.productForm.controls['price'].setValue(this.editProduct.price);
-      console.log("inside check" + this.editProduct.varientValuesId)
       this.varientValuesId = parseInt(this.editProduct.varientValuesId);
     }
 
@@ -59,8 +56,7 @@ export class VarientValuesComponent implements OnInit {
     let product: any;
     if (this.varientValuesId > 0) {
       if (this.productForm.valid) {
-        console.log("varient id edit check =====>" + this.varientValuesId);
-        this.pro = new varientvalues(this.varientValuesId, this.productForm.value.varientId, this.productForm.value.name, this.productForm.value.price)
+        this.pro = new VarientValues(this.varientValuesId, this.productForm.value.varientId, this.productForm.value.name, this.productForm.value.price)
         this.productService.editVarientValues(this.pro, localStorage.getItem("email"))
           .subscribe({
             next: (response: any) => {

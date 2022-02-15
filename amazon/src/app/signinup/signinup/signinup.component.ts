@@ -13,12 +13,9 @@ export class SigninupComponent implements OnInit {
 
   user = new User();
 
-  //For Login
   log_email:any;
   log_password:any;
 
-  //ForRegister
-  
 
   hide = true;  
   constructor(private signinupService:SigninupService,private route:Router, private commonService:CommonService) { }
@@ -59,7 +56,6 @@ export class SigninupComponent implements OnInit {
         if(response.successErrorType == "SUCCESS"){
           Swal.fire("Register Success",response.message,"success");
           this.user = {} as User;
-          //this.route.navigate(['']);
         }else{
           Swal.fire("SignUp failed",response.message,"error");
         }

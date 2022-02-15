@@ -18,7 +18,6 @@ export class AdminPageComponent implements OnInit {
   }
 
   sideBarToggler() {
-    console.log("sasi");
     this.sideBarOpen = !this.sideBarOpen;
   }
 

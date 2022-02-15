@@ -20,7 +20,7 @@ export class ForgetpasswordComponent implements OnInit {
   {
     var result=this.signinupservice.requestOtpFromRemote(this.user);
 
-      result.subscribe((data:any)=>{console.log(data)
+      result.subscribe((data:any)=>{
       
       if(data.toString()=="Verify")
       {

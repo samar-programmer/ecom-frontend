@@ -59,7 +59,6 @@ export class ProductComponent implements OnInit {
       width: '35%',
       data: row
     }).afterClosed().subscribe((val: any) => {
-      console.log("sasi");
       this.editDialougCloseCheck = 10;
       this.getProductsForAdmin();
 
@@ -71,7 +70,6 @@ export class ProductComponent implements OnInit {
       width: '35%',
       data: row
     }).afterClosed().subscribe((val: any) => {
-      console.log("sasi");
       this.editDialougCloseCheck = 10;
       this.getProductsForAdmin();
 
@@ -83,7 +81,6 @@ export class ProductComponent implements OnInit {
       width: '35%',
       data: row
     }).afterClosed().subscribe((val: any) => {
-      console.log("sasi");
       this.editDialougCloseCheck = 10;
       this.getProductsForAdmin();
 
@@ -91,21 +88,10 @@ export class ProductComponent implements OnInit {
   }
 
 
-
-
-  // onSuccess1(){
-  //   this.notificationsService.success('Success', "response.toString()", {
-  //     position:['top','left'],
-  //     timeOut:2000,
-  //     animate:'fade',
-  //     showProgressBar:true });
-  // }
-
   getProductsForAdmin() {
     this.productService.getProductsForAdmin(localStorage.getItem("email"))
       .subscribe({
         next: (response: any) => {
-          console.log(response);
           if (response.successErrorType = "SUCCESS") {
             this.dataSource = new MatTableDataSource(response.productList);
             this.dataSource.paginator = this.paginator;

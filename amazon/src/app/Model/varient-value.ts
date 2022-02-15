@@ -1,4 +1,4 @@
-export class varientvalues{
+export class VarientValues{
     constructor(
         public varientValuesId?:any,
         public varientId?: any,

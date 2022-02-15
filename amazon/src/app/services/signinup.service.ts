@@ -25,7 +25,6 @@ export class SigninupService {
 
   requestOtpFromRemote(user:User)
   {
-    console.log("king")
       return this.http.post(this.baseUrl+"send-otp",user,{responseType: 'text' as 'json'});    
   }
 

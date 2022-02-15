@@ -1,8 +1,9 @@
+import { Product } from './../../Model/product';
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ElementRef, ViewChild } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { products } from './../../Model/product';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 
@@ -12,9 +13,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  @Input() public product: any;
-  @Output() productAddToCart: EventEmitter<products> = new EventEmitter<products>();
-  constructor(private http: HttpClient, fb: FormBuilder) {
+  @Input() public product : Product = {};
+  @Output() productAddToCart: EventEmitter<Product> = new EventEmitter<Product>();
+  constructor() {
 
 
   }
@@ -23,7 +24,10 @@ export class ProductComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("inside prduct" + this.product)
+    console.log( this.product)
+    console.log("product type");
+    console.log( this.product)
+    
   }
 
   addToCart() {
