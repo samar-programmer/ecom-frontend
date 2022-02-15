@@ -1,0 +1,39 @@
+
+<mat-toolbar color="accent">
+    <mat-toolbar-row>
+        <!-- (click)="toggleSideBar()" -->
+        <!-- <button mat-icon-button >
+                <mat-icon>menu</mat-icon>
+            </button> -->
+
+        <span>Amazon</span>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+            <ul fxLayout="row" fxLayoutGap="20px">
+
+                <li>
+                    <button mat-icon-button (click)="gotoEditPage()" routerLinkActive="router-link-active">
+                        <mat-icon> edit_attributes</mat-icon>
+                    </button>
+                </li>
+                <li>
+                    <button mat-icon-button (click)="gotoCartPage()" routerLinkActive="router-link-active">
+                        <mat-icon>add_shopping_cart</mat-icon>
+                    </button>
+                </li>
+                <li>
+                    <button mat-button [matMenuTriggerFor]="menutrigger">
+                        <mat-icon>person_outline</mat-icon>
+                    </button>
+                    <mat-menu #menutrigger="matMenu">
+                        <button mat-menu-item (click)="signOut()">
+                            <mat-icon>exit_to_app</mat-icon>
+                            Sign out
+                        </button>
+                    </mat-menu>
+
+                </li>
+            </ul>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

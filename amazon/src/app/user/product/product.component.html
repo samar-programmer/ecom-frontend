@@ -1,0 +1,92 @@
+<div class="card" style="margin-bottom: 50px" >
+    <div class="card-body" >
+            <h5 class="card-title">{{product.productName}}</h5>
+            <img src="{{product.imgsrc}}" class="img-responsive" height="150px"
+                    width="228px" alt="Image">
+           <div>
+            <p ><span>Description :</span> {{product.description}}</p>
+            <p> Origianl Price : <del>{{product.productPrice}} </del></p>
+            <p> Discount Price : {{product.productDiscountPrice}} </p>
+            <h4><b>Varients</b></h4>
+            <div class=" align-left" *ngFor="let varient of product.varients; let indexOfproduct = index">
+           
+              <!-- <span  class="col-3 align-left" *ngFor="let varientval of varient.varientvalues; let i = index">
+                <span class="col-3 align-left" style="margin-left:10px;"><b>{{varient.value}} : </b></span>
+                <span class="col-3 align-left" style="margin-left:10px"> {{varientval.name}}</span>
+                 <span class="col-3 align-left" style="margin-left:10px">{{varientval.price}}</span>
+                 <span class="col-3 align-left" style="margin-left:10px"><input class="form-check-input" type="checkbox" value="" [checked]="isChecked" (click)="addExtraValues()" ></span><br>
+              </span> -->
+              <b>{{varient.value}}:</b>
+
+             
+              <form >
+              <!-- //<div class="container"> -->
+                <div class="row" *ngFor="let varientval of varient.varientvalues; let indexOfelement = index">
+                               
+
+                                <!-- <ng-template #other_content [(isChecked)]=false></ng-template> -->
+                                            
+                                            
+                  <div class="col-sm">
+                             
+                  </div>
+                  <div class="col-sm">
+                        {{varientval.name}}
+                  </div>
+                  <div class="col-sm">
+                        {{varientval.price | currency:'INR'}} 
+                        
+                  </div>
+                 
+                  <div class="col-sm">
+                             
+                        <div *ngIf="indexOfelement == 0  && indexOfproduct == 0; else elseBlock">
+                                   
+
+
+                                    <div class="form-check">
+                                                <input class="form-check-input" (click)="addExtraValues(varientval.price, $event, this)" type="radio" checked="false" name="flexRadioDefault">
+                                                
+                                     </div>
+
+
+                                    <!-- <input  type="radio"  class="custom-control-input"  required (click)="addExtraValues(varientval.price, $event, this)"  > -->
+
+                        </div>
+
+                         <ng-template #elseBlock> 
+
+                                    <div *ngIf=" indexOfproduct >= 1; else elseBlock1">
+                                                <div class="form-check">
+                                                            <input class="form-check-input" (click)="addExtraValuescheck(varientval.price, $event, this)" type="checkbox"   name="flexRadioDefault">
+                                                            
+                                                 </div>
+                                    </div>
+
+                                    <ng-template #elseBlock1> 
+                                                <div class="form-check">
+                                                            <input class="form-check-input" (click)="addExtraValues(varientval.price, $event, this)" type="radio"   name="flexRadioDefault">
+                                                            
+                                                 </div>
+
+                                    </ng-template>
+                              
+                                    
+                              
+                              </ng-template> 
+
+                  </div>
+                </div>
+
+            </form>
+              <!-- </div> -->
+        
+        </div>
+
+        <p style="margin-top:20px;"><span style="color:blue"><b>Total Price : </b></span><b>{{product.totalPrice | currency:'INR'}}</b></p>
+
+        
+           </div>
+            <button class="btn btn-primary" style="text-align: right;margin-top:20px" (click)="addToCart()" >Add to cart</button>
+    </div>
+</div>

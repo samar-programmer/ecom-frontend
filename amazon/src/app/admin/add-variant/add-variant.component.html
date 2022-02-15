@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Add Product Variants</h1>
+
+
+<div mat-dialog-content>
+    <form [formGroup]="productForm">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Product Id</mat-label>
+            <input formControlName="productId" matInput placeholder="productId">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Product Varient Types</mat-label>
+            <input formControlName="category" matInput placeholder="Category">
+        </mat-form-field>
+
+    </form>
+</div>
+<div mat-dialog-action [align]="'end'">
+    <button mat-raised-button color="accent" mat-dialog-close>
+        close
+    </button>
+    <button mat-raised-button color="primary" style="margin-left:10px" (click)="addProduct()">
+        {{actionBtn}}
+    </button>
+</div>

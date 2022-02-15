@@ -1,0 +1,8 @@
+
+*.js
+*.md
+*.mjs
+**/node_modules
+*.pack
+*.old
+*.json
