@@ -2,7 +2,23 @@
     <br>
     <div class="row">
 
-        <div class="row" style="margin-bottom:20px; text-align:right; color:blue"><p><b>Total Items in cart : {{totalCartItems}}</b></p></div>
+        <div class="row" style="margin-bottom:20px; text-align:right; color:blue">
+            <div class=" col-sm-8">
+              </div>
+              
+                <div class="col-sm-3" >
+                    <p><b>Total Items in cart : {{totalCartItems}}</b></p>
+                  </div>
+            <div class="col-sm-1">
+               
+                    <button mat-icon-button (click)="gotoCartPage()" routerLinkActive="router-link-active">
+                        <mat-icon>add_shopping_cart</mat-icon>
+                    </button>
+              
+              </div>
+              
+          
+        </div>
       <div class="col-3 align-left" *ngFor="let product of products">
         <app-product [product]="product" (productAddToCart)="addToCart($event)">Loading...</app-product>
       </div>

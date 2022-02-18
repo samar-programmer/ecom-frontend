@@ -49,23 +49,25 @@ export class ProductService {
   
 
 
-  addVarient(productId:any, value:any, email:any){
+  addVarient(productId:any, value:any, model:string ,email:any){
     
     let params = new HttpParams()
     .set('productId', productId)
     .set('value', value)
-    .set('email',email);
+    .set('email',email)
+    .set('model', model);
     let result:any = this.httpClient.post( this.baseUrl+'varient',params);
     return result;
   }
 
-  addVarientValues(varientId:any, name:any, price:any, email:any){
+  addVarientValues(varientId:any, name:any, price:any, model:string, email:any){
     
     let params = new HttpParams()
     .set('varientId', varientId)
     .set('name', name)
     .set('price', price)
-    .set('email', email);
+    .set('email', email)
+    .set('model', model);
     let result:any = this.httpClient.post( this.baseUrl+'varientvalue',params);
     return result;
   }

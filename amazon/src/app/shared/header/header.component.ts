@@ -26,10 +26,6 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  gotoCartPage(){
-    this.route.navigate(['./cart']);
-  }
-
   gotoEditPage(){
     this.route.navigate(['./editprofile']);
   }

@@ -17,13 +17,17 @@ import Swal from 'sweetalert2';
 })
 export class ProductComponent implements OnInit {
 
-  displayedColumns: string[] = ['productId', 'productName', 'category', 'brand', 'model', 'quantity', 'productPrice', 'productDiscountPrice', 'description', 'addeddate', 'action'];
+  productListLength:number = 0;
+  varientListLength:number = 0;
+  varientValueListLength:number = 0;
+
+  displayedColumns: string[] = [ 'productName', 'category', 'brand', 'model', 'quantity', 'productPrice', 'productDiscountPrice', 'description', 'addeddate', 'action'];
   dataSource!: MatTableDataSource<any>;
 
-  displayedColumnsVarient: string[] = ['varientId', 'productId', 'value', 'action'];
+  displayedColumnsVarient: string[] = ['model', 'value', 'action'];
   dataSourceVarient!: MatTableDataSource<any>;
 
-  displayedColumnsVarientValues: string[] = ['varientValuesId', 'varientId', 'name', 'price', 'action'];
+  displayedColumnsVarientValues: string[] = [ 'model', 'name', 'price', 'action'];
   dataSourceVarientValues!: MatTableDataSource<any>;
 
 
@@ -36,7 +40,7 @@ export class ProductComponent implements OnInit {
   @ViewChild(MatPaginator) paginatorvarient!: MatPaginator;
   @ViewChild(MatSort) sortvarient!: MatSort;
 
-
+  @ViewChild(MatPaginator) paginatorvarientvalues!: MatPaginator;
   @ViewChild(MatSort) sortvarientValues!: MatSort;
 
   constructor(private dialog: MatDialog, private productService: ProductService) { }
@@ -93,21 +97,25 @@ export class ProductComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           if (response.successErrorType = "SUCCESS") {
-            this.dataSource = new MatTableDataSource(response.productList);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-
-            this.dataSourceVarient = new MatTableDataSource(response.varientList);
-            this.dataSourceVarient.sort = this.sortvarient;
-
-            this.dataSourceVarientValues = new MatTableDataSource(response.varientValuesList);
-            this.dataSourceVarientValues.sort = this.sortvarientValues;
-            if (this.editDialougCloseCheck == 0 && this.deleteCheck == 0) {
-              Swal.fire("Product Retrived SuccessFully", "<b>status code :</b> " + response.status + ", <b>status message :</b> " + response.message, "success");
-
+            this.productListLength = response.productList.length;
+            this.varientListLength = response.varientList.length;
+            this.varientValueListLength = response.varientValuesList.length;
+            if(response.productList.length > 0){
+              this.dataSource = new MatTableDataSource(response.productList);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+  
+              this.dataSourceVarient = new MatTableDataSource(response.varientList);
+              this.dataSourceVarient.sort = this.sortvarient;
+  
+              this.dataSourceVarientValues = new MatTableDataSource(response.varientValuesList);
+              this.dataSourceVarientValues.sort = this.sortvarientValues;
+            //  this.dataSourceVarientValues.paginator = this.paginatorvarientvalues;
+              
+              this.editDialougCloseCheck = 0;
+              this.deleteCheck = 0;
             }
-            this.editDialougCloseCheck = 0;
-            this.deleteCheck = 0;
+           
           } else {
             Swal.fire("Product Not Retrived", "<b>status code :</b> " + response.status + ", <b>status message :</b> " + response.message, "error");
           }

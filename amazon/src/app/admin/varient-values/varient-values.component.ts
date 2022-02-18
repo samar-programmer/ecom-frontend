@@ -31,14 +31,18 @@ export class VarientValuesComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
-      varientId: ['', Validators.required],
+      model: ['', Validators.required],
       name: ['', Validators.required],
       price: ['', Validators.required],
+      varientId: ['', Validators.required],
 
     });
 
+    console.log("model===>"+this.editProduct.varientId);
+
     if (this.editProduct) {
       this.productForm.controls['varientId'].setValue(this.editProduct.varientId);
+      this.productForm.controls['model'].setValue(this.editProduct.model);
       this.productForm.controls['name'].setValue(this.editProduct.name);
       this.productForm.controls['price'].setValue(this.editProduct.price);
       this.varientValuesId = parseInt(this.editProduct.varientValuesId);
@@ -52,11 +56,13 @@ export class VarientValuesComponent implements OnInit {
     let varientId = this.productForm.value.varientId;
     let name = this.productForm.value.name;
     let price = this.productForm.value.price;
+    let model = this.productForm.value.model;
+
 
     let product: any;
     if (this.varientValuesId > 0) {
       if (this.productForm.valid) {
-        this.pro = new VarientValues(this.varientValuesId, this.productForm.value.varientId, this.productForm.value.name, this.productForm.value.price)
+        this.pro = new VarientValues(this.varientValuesId, this.productForm.value.varientId, this.productForm.value.name, this.productForm.value.price, this.productForm.value.model)
         this.productService.editVarientValues(this.pro, localStorage.getItem("email"))
           .subscribe({
             next: (response: any) => {
@@ -71,7 +77,7 @@ export class VarientValuesComponent implements OnInit {
       }
     } else {
       if (this.productForm.valid) {
-        this.productService.addVarientValues(varientId, name, price, localStorage.getItem("email"))
+        this.productService.addVarientValues(varientId, name, price, model, localStorage.getItem("email"))
           .subscribe({
             next: (response: any) => {
               this.productForm.reset();

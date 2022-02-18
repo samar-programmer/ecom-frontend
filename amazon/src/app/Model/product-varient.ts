@@ -5,6 +5,7 @@ export class ProductVarient{
         public varientId?:number,
         public productId?: string,
         public value?: string,
+        public model?: string,
         public email?:string,
         public varientvalues?:VarientValues[]
         ) {}

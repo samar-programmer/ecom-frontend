@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class UserPageComponent implements OnInit {
   products: Product[] = [];
-  totalCartItems:any;
+  totalCartItems:any = "";
   constructor(private productService: ProductService, private cartservice: CartService, private route:Router) { }
 
   ngOnInit(): void {
@@ -22,7 +22,13 @@ export class UserPageComponent implements OnInit {
     .subscribe({
       next:(response:any)=>{
          if(response.oblist.length > 0){
-          this.totalCartItems = response.oblist.length;
+          //this.totalCartItems = response.oblist.length;
+          response.oblist.forEach((element:any) => {
+            debugger
+            this.totalCartItems = Number(this.totalCartItems)+element.quantity;
+          });
+
+
          }else{
           this.totalCartItems = "0 Items"
          }
@@ -38,8 +44,7 @@ export class UserPageComponent implements OnInit {
       next:(response:any)=>{
         if(response.successErrorType == "SUCCESS"){
           this.products= response.productList;
-        //  for(let product of response.productList ){
-        //  }
+        
         }
        
       },
@@ -54,7 +59,13 @@ export class UserPageComponent implements OnInit {
 
     addToCart(e:any) {
       this.cartservice.addToCart(e, localStorage.getItem("email")).subscribe((response:any) => {
-        Swal.fire("Product Added to cart","<b>status code :</b> "+response.status+", <b>status message :</b> " +response.message,"success");
+       
+        if("ERROR"==response.successErrorType){
+          Swal.fire("Product Exist", response.message,"error");
+        }else{
+          Swal.fire("Product Added", response.message,"success");
+        }
+       
         
         this.cartservice.getCartItems(localStorage.getItem("email"))
     .subscribe({
@@ -64,11 +75,14 @@ export class UserPageComponent implements OnInit {
          }else{
           this.totalCartItems = "0 Items"
          }
-        
        
       },
      
     })
       })
+    }
+
+    gotoCartPage(){
+      this.route.navigate(['./cart']);
     }
 }

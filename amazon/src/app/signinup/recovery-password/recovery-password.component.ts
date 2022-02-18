@@ -18,6 +18,8 @@ export class RecoveryPasswordComponent implements OnInit {
 
   verifyOtp()
   {
+
+    this.user.email = localStorage.getItem("email");
       var result=this.service.verifyOtpFromRemote(this.user);
 
         result.subscribe((data:any)=>{

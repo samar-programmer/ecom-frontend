@@ -25,7 +25,7 @@ export class SigninupService {
 
   requestOtpFromRemote(user:User)
   {
-      return this.http.post(this.baseUrl+"send-otp",user,{responseType: 'text' as 'json'});    
+      return this.http.post(this.baseUrl+"send-otp",user);    
   }
 
   verifyOtpFromRemote(user:User)

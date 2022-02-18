@@ -13,18 +13,23 @@ import { Router } from '@angular/router';
 export class EditprofileComponent implements OnInit {
  
   user=new User();
-
+  role:any;
   constructor(private signinupService: SigninupService, private route: Router) { }
 
   ngOnInit(): void {
 
-    var email=localStorage.getItem("email")
+    let email=localStorage.getItem("email");
+     this.role = localStorage.getItem("role");
+
+
  
     if(email==null){
   
     this.route.navigate(['']);
     }
 
+
+    
 
       let result =this.signinupService.getProfile(localStorage.getItem("email"));
       result.subscribe({
@@ -35,6 +40,17 @@ export class EditprofileComponent implements OnInit {
       })
       
     }
+
+
+    continuePage(){
+      if(this.role == "ADMIN"){
+        this.route.navigate(['./admin'])
+      }else{
+        this.route.navigate(['./user'])
+      }
+    }
+
+    
 
     editProfileChanges(){
       let result =this.signinupService.editProfileChanges(this.user);

@@ -30,6 +30,7 @@ export class AddproductdialougComponent implements OnInit {
       imgsrc: ['', Validators.required],
       addeddate: ['', Validators.required],
       productPrice: ['', Validators.required],
+      discountPercentage:[''],
       productDiscountPrice: ['', Validators.required],
       description: ['', Validators.required],
       brand: ['', Validators.required],
@@ -75,14 +76,14 @@ export class AddproductdialougComponent implements OnInit {
           .subscribe({
             next: (response: any) => {
               if (response.successErrorType == "SUCCESS") {
-                Swal.fire("Product Updated SuccessFully", "<b>status code :</b> " + response.status + ", <b>status message :</b> " + "Product Updated Success Fully for Product Id :" + this.productId, "success");
+                Swal.fire("Product Updated SuccessFully", "Product Updated Success Fully ", "success");
               }
               this.productForm.reset();
               this.dialogRef.close('save');
               product = null;
             },
             error: () => {
-              alert("error");
+              Swal.fire("Product Updated SuccessFully", "Product Not Updated", "error");
             }
           })
       }
@@ -92,22 +93,28 @@ export class AddproductdialougComponent implements OnInit {
           .subscribe({
             next: (response: any) => {
               if (response.successErrorType == "SUCCESS") {
-                Swal.fire("Product Added SuccessFully", "<b>status code :</b> " + response.status + ", <b>status message :</b> " + response.message, "success");
+                Swal.fire("Product Added SuccessFully",  response.message, "success");
               } else {
-                Swal.fire("Unable to save product details", "<b>status code :</b> " + response.status + ", <b>status message :</b> " + response.message, "error");
+                Swal.fire("Unable to save product details",  response.message, "error");
 
               }
               this.productForm.reset();
               this.dialogRef.close('Update');
             },
             error: () => {
-              alert("error");
+              Swal.fire("Unable to save product details", "Add Another Model" , "error");
             }
           })
       }
     }
 
   };
-
+  
+  calculateDiscountPrice(){
+    let decimalVal = this.productForm.value.discountPercentage/100;
+    let dicountPrice = decimalVal*this.productForm.value.productPrice;
+    this.productForm.controls['productDiscountPrice'].setValue(dicountPrice);
+    dicountPrice=0;
+  }
 
 }

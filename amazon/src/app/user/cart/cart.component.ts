@@ -18,20 +18,29 @@ export class CartComponent implements OnInit {
 
   }
 
+  valid=true;
 
   ngOnInit() {
 
 
-    var email = localStorage.getItem("email")
-
-    if (email == null) {
+    let email = localStorage.getItem("email");
+    let role = localStorage.getItem("role");
+    if (email == null ) {
       this.route.navigate(['']);
+    }else if(role == 'ADMIN'){
+      this.route.navigate(['./admin']);
     }
 
 
 
     this.cartService.getCartItems(localStorage.getItem("email")).subscribe((response: any) => {
       this.cartlist = response.oblist;
+
+      if(this.cartlist.length <= 0){
+        this.valid= false;
+      }else{
+        this.valid= true;
+      }
       
       this.cartlist.forEach((value: any) => {
         this.totalSum = this.totalSum + (value.quantity * value.total);
@@ -61,6 +70,11 @@ export class CartComponent implements OnInit {
 
         this.totalSum = this.totalSum + (value.quantity * value.total);
       });
+      if(this.cartlist.length <= 0){
+        this.valid= false;
+      }else{
+        this.valid= true;
+      }
     });
   }
 

@@ -54,8 +54,8 @@ export class SigninupComponent implements OnInit {
     result.subscribe({
       next:(response:any)=>{
         if(response.successErrorType == "SUCCESS"){
+          this.route.navigate(['']);
           Swal.fire("Register Success",response.message,"success");
-          this.user = {} as User;
         }else{
           Swal.fire("SignUp failed",response.message,"error");
         }

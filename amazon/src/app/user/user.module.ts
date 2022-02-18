@@ -1,3 +1,5 @@
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +26,8 @@ import { CartComponent } from './cart/cart.component';
     ReactiveFormsModule,
     MatSidenavModule,
     MatCardModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   exports:[
     UserPageComponent

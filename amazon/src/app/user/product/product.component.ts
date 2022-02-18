@@ -1,9 +1,6 @@
 import { Product } from './../../Model/product';
 
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ElementRef, ViewChild } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 
@@ -14,19 +11,20 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
   @Input() public product : Product = {};
+  originalprice ?:string = ""; 
+  count?:number;
+
+
+  varientValue:any;
+
+  previousVal:any;
+
   @Output() productAddToCart: EventEmitter<Product> = new EventEmitter<Product>();
   constructor() {
-
-
   }
 
-
-
-
   ngOnInit(): void {
-    console.log( this.product)
-    console.log("product type");
-    console.log( this.product)
+    this.originalprice = this.product.totalPrice;
     
   }
 
@@ -34,25 +32,18 @@ export class ProductComponent implements OnInit {
     this.productAddToCart.emit(this.product);
   }
 
-  addExtraValues(value: any, event: any, tht: any) {
-    if (event.target.checked) {
-      tht.product.totalPrice = Number(tht.product.productDiscountPrice) + Number(value);
-    } else {
-      tht.product.totalPrice = Number(tht.product.productDiscountPrice) - Number(value);
-    }
+  addExtraValues(value: any, event: any, tht: any, name:any) {
+    tht.product.varients.forEach((element:any) => {
+      element.varientvalues.forEach((val:any)=> {
+        if(val.name == name){
+          tht.product.totalPrice = Number(tht.product.totalPrice) - Number(this.previousVal);
+          tht.product.totalPrice = Number(tht.product.totalPrice) + Number(value);
+        }
+        this.previousVal = val.price
+      });
+    });
 
   }
-
-  addExtraValuescheck(value: any, event: any, tht: any) {
-    if (event.target.checked) {
-      tht.product.totalPrice = Number(tht.product.totalPrice) + Number(value);
-    } else {
-      tht.product.totalPrice = Number(tht.product.totalPrice) - Number(value);
-    }
-
-  }
-
-
 
 }
 

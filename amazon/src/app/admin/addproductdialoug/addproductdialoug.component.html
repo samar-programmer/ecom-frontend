@@ -7,10 +7,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Product Category</mat-label>
       <mat-select formControlName="category" placeholder="Category">
-        <mat-option value="Fruits">Fruits</mat-option>
-        <mat-option value="Vegetables">Vegetables</mat-option>
         <mat-option value="Electronics">Electronics</mat-option>
-        <mat-option value="Add">Addvertisement</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -51,9 +48,15 @@
       <mat-label>Product Price</mat-label>
       <input formControlName="productPrice" matInput placeholder="Orignal price">
     </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Discount Percentage</mat-label>
+      <input formControlName="discountPercentage" (blur)="calculateDiscountPrice()" matInput placeholder="Discount Percentage" >
+    </mat-form-field>
+
     <mat-form-field appearance="outline">
       <mat-label>Product Discount price</mat-label>
-      <input formControlName="productDiscountPrice" matInput placeholder="Discount price">
+      <input formControlName="productDiscountPrice" matInput placeholder="Discount price" >
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Product Description</mat-label>
